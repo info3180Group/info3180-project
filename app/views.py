@@ -117,7 +117,7 @@ def create_profile():
     form = ProfileForm()
     if form.validate_on_submit():
         # Check if the user already has a profile
-        existing_profile = Profile.query.filter_by(user_id_fk=form.user_id_fk.data).first()
+        existing_profile = Profile.query.filter_by(id=form.id.data).first()
         if existing_profile:
             return jsonify({'message': 'User already has a profile'}), 400
         
@@ -142,9 +142,9 @@ def delete_profile(user_id):
     db.session.commit()
     return jsonify({'message': 'Profile(s) deleted successfully'}), 200
 
-@app.route('/api/profile/<int:user_id>', methods=['GET'])
-def get_profile(user_id):
-    profile = Profile.query.filter_by(user_id_fk=user_id).first()
+@app.route('/api/profile/<int:profile_id>', methods=['GET'])
+def get_profile(profile_id):
+    profile = Profile.query.filter_by(id=profile_id).first()
     if not profile:
         return jsonify({'message': 'Profile not found'}), 404
     result = {
