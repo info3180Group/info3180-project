@@ -119,9 +119,70 @@ export default {
   
 <style scoped>
 .register {
-  max-width: 500px;
-  margin: auto;
-  padding: 20px;
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.register h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+form div {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #444;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.message,
+.register p {
+  text-align: center;
+  margin-top: 10px;
+  color: #d9534f; /* red for errors; adjust if needed */
 }
 
 .login-link {
@@ -130,7 +191,7 @@ export default {
 }
 
 .login-link a {
-  color: #4CAF50;
+  color: #007BFF;
   text-decoration: none;
 }
 

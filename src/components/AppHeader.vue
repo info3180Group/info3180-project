@@ -2,7 +2,7 @@
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">VueJS with Flask</a>
+        <a class="navbar-brand" href="/">Jam-Date</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -76,6 +76,54 @@ const handleLogout = () => {
 };
 </script>
 
-<style>
-/* Add any component specific styles here */
+
+<style scoped>
+/* Customize the brand */
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #fff !important;
+  letter-spacing: 0.5px;
+}
+
+/* Nav link appearance */
+.nav-link {
+  font-weight: 500;
+  color: #f0f0f0 !important;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Active or hovered nav link */
+.nav-link:hover,
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #ffffff !important;
+}
+
+/* Navbar container spacing */
+.navbar .container-fluid {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Nav items spacing */
+.nav-item {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+/* Toggle button icon color override */
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler-icon {
+  filter: brightness(0) invert(1); /* ensure it's white */
+}
+
+/* Fix for top spacing due to fixed-top */
+body {
+  padding-top: 70px; /* adjust if navbar height changes */
+}
 </style>

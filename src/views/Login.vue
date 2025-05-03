@@ -88,8 +88,66 @@ export default {
 <style scoped>
 .login {
   max-width: 400px;
-  margin: auto;
-  padding: 20px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+form div {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #444;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #007BFF;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+p {
+  text-align: center;
+  margin-top: 10px;
+  color: #d9534f; /* red for error messages */
 }
 
 .register-link {
@@ -98,7 +156,7 @@ export default {
 }
 
 .register-link a {
-  color: #4CAF50;
+  color: #007BFF;
   text-decoration: none;
 }
 
@@ -106,3 +164,4 @@ export default {
   text-decoration: underline;
 }
 </style>
+
