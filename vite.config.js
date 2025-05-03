@@ -15,7 +15,7 @@ export default defineConfig({
     proxy: {
       '^/api*': {
         
-      target: 'https://info3180-project-backend.onrender.com'
+      target: 'http://localhost:8080/'
       }
     }
   }
