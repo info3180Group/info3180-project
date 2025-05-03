@@ -10,6 +10,7 @@ from flask import render_template, request, jsonify, send_file,url_for, flash, s
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from flask_wtf.csrf import generate_csrf
+from app.auth_guard import encode_auth_token
 from app.forms import *
 from app.models import *
 
@@ -62,16 +63,20 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and check_password_hash(user.password, form.password.data):
             # Implement session or token here
+            payload = {
+                    'id': user.id,
+                    'username': user.username,
+                    'name': user.name,
+                    'email': user.email,
+                    'photo': user.photo,
+                    'date_joined': user.date_joined.isoformat()  
+                }
+            
+            token = encode_auth_token(payload)
             return jsonify({
             'message': 'Login successful',
-            'user': {
-                'id': user.id,
-                'username': user.username,
-                'name': user.name,
-                'email': user.email,
-                'photo': user.photo,
-                'date_joined': user.date_joined.isoformat()  
-            }
+            'user': payload,
+            'token': token
         })
         else:
             return jsonify({'error': 'Invalid credentials'}), 401
@@ -117,7 +122,7 @@ def create_profile():
     form = ProfileForm()
     if form.validate_on_submit():
         # Check if the user already has a profile
-        existing_profile = Profile.query.filter_by(id=form.id.data).first()
+        existing_profile = Profile.query.filter_by(user_id_fk=form.user_id_fk.data).first()
         if existing_profile:
             return jsonify({'message': 'User already has a profile'}), 400
         
