@@ -1,8 +1,8 @@
 # Group Members
 
-Mickoy Banton (620156895)
-Mckoy Banton (620156895)
-Kevonteh Brown (620154547)
+- Mickoy Banton (620156895)
+- Mckoy Banton (620156895)
+- Kevonteh Brown (620154547)
 
 ## Recommended IDE Setup
 
