@@ -23,11 +23,13 @@
 import axios from 'axios';
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { useAuthStore } from '@/store/auth';
 
 export default {
   name: 'Login',
   setup() {
     const router = useRouter();
+    const authStore = useAuthStore();
     const username = ref('');
     const password = ref('');
     const message = ref('');
@@ -53,18 +55,21 @@ export default {
             'X-CSRF-Token': csrf_token.value,
           },
         });
-          const data = response.data;
+        const data = response.data;
+        
         if(response.status === 200) {
-          localStorage.setItem("token", data.token);
-          localStorage.setItem(
-              "user",
-              JSON.stringify({ name: data.user.name, username: data.user.username, email: data.user.email, id: data.user.id , photo: data.user.photo, date_joined: data.user.date_joined })
-          );
+          authStore.setToken(data.token);
+          authStore.setUser({
+            name: data.user.name,
+            username: data.user.username,
+            email: data.user.email,
+            id: data.user.id,
+            photo: data.user.photo,
+            date_joined: data.user.date_joined
+          });
           router.push({ name: "home" });
-
         }
         message.value = response.data.message;
-
       } catch (error) {
         message.value = error.response?.data?.error || 'Login failed';
         console.error("Login error:", error);
