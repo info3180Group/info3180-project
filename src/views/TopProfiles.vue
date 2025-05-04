@@ -216,6 +216,8 @@ export default {
     };
   }
 };
+
+</script>
 <style scoped>
 .top-profiles {
   margin-top: 2rem;
