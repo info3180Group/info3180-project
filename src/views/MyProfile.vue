@@ -13,7 +13,7 @@
     <div v-else-if="!profile" class="text-center">
       <div class="alert alert-info">
         <p>You haven't created a profile yet!</p>
-        <RouterLink to="/profile/edit" class="btn btn-primary mt-3">
+        <RouterLink to="/profiles/new" class="btn btn-primary mt-3">
           Create Profile
         </RouterLink>
       </div>
