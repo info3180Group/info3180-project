@@ -196,25 +196,69 @@ export default {
 
 <style scoped>
 .matches {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.matches h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
 }
 
 .card {
-  transition: transform 0.2s;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+  border: none;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: scale(1.02);
 }
 
-.interests-badges {
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 600;
   margin-bottom: 1rem;
 }
 
+.card-text {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.list-unstyled li {
+  padding: 0.3rem 0;
+}
+
+.interests-badges {
+  margin-top: 0.5rem;
+}
+
 .badge {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
+  padding: 0.5em 0.75em;
+  border-radius: 20px;
+}
+
+.btn {
+  font-size: 0.9rem;
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+}
+
+.text-danger {
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 </style>
 
