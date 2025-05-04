@@ -1,6 +1,8 @@
-# INFO3180 VueJS and Flask Starter
+# Group Members
 
-This template should help get you started developing with Vue 3 on the frontend and Flask as an API on the backend.
+Mickoy Banton (620156895)
+Mckoy Banton (620156895)
+Kevonteh Brown (620154547)
 
 ## Recommended IDE Setup
 
