@@ -17,36 +17,90 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <RouterLink to="/" class="nav-link active">Home</RouterLink>
+              <RouterLink 
+                to="/" 
+                class="nav-link"
+                exact-active-class="active"
+              >
+                Home
+              </RouterLink>
             </li>
             <li class="nav-item">
-              <RouterLink class="nav-link" to="/about">About</RouterLink>
+              <RouterLink 
+                class="nav-link" 
+                to="/about"
+                active-class="active"
+              >
+                About
+              </RouterLink>
             </li>
             <!-- Show these items only when user is NOT logged in -->
-            <template v-if="!isAuthenticated">
+            <template v-if="!authStore.isAuthenticated">
               <li class="nav-item">
-                <RouterLink class="nav-link" to="/login">Login</RouterLink>
+                <RouterLink 
+                  class="nav-link" 
+                  to="/login"
+                  active-class="active"
+                >
+                  Login
+                </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink class="nav-link" to="/register">Register</RouterLink>
+                <RouterLink 
+                  class="nav-link" 
+                  to="/register"
+                  active-class="active"
+                >
+                  Register
+                </RouterLink>
               </li>
             </template>
             <!-- Show these items only when user is logged in -->
             <template v-else>
               <li class="nav-item">
-                <RouterLink class="nav-link" to="/my-profile">My Profile</RouterLink>
+                <RouterLink 
+                  class="nav-link" 
+                  to="/my-profile"
+                  active-class="active"
+                >
+                  My Profile
+                </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink class="nav-link" to="/profiles">Profiles</RouterLink>
+                <RouterLink 
+                  class="nav-link" 
+                  to="/profiles"
+                  active-class="active"
+                >
+                  Profiles
+                </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink class="nav-link" to="/matches">Matches</RouterLink>
+                <RouterLink 
+                  class="nav-link" 
+                  to="/matches"
+                  active-class="active"
+                >
+                  Matches
+                </RouterLink>
               </li>
               <li class="nav-item">
-                <RouterLink class="nav-link" to="/top-profiles">Top Profiles</RouterLink>
+                <RouterLink 
+                  class="nav-link" 
+                  to="/top-profiles"
+                  active-class="active"
+                >
+                  Top Profiles
+                </RouterLink>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#" @click.prevent="handleLogout">Logout</a>
+                <a 
+                  class="nav-link" 
+                  href="#" 
+                  @click.prevent="handleLogout"
+                >
+                  Logout
+                </a>
               </li>
             </template>
           </ul>
@@ -58,27 +112,20 @@
 
 <script setup>
 import { RouterLink } from "vue-router";
-import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/store/auth';
 
 const router = useRouter();
+const authStore = useAuthStore();
 
-// Check if user is authenticated by looking for token in localStorage
-const isAuthenticated = computed(() => {
-  return !!localStorage.getItem('token');
-});
-
-// Logout handler
 const handleLogout = () => {
-  localStorage.removeItem('token');
-  localStorage.removeItem('user');
+  authStore.logout();
   router.push('/login');
 };
 </script>
 
-
 <style scoped>
-/* Customize the brand */
+
 .navbar-brand {
   font-weight: 700;
   font-size: 1.4rem;
@@ -86,19 +133,22 @@ const handleLogout = () => {
   letter-spacing: 0.5px;
 }
 
-/* Nav link appearance */
+
 .nav-link {
+  position: relative;
+  padding: 0.5rem 1rem;
   font-weight: 500;
   color: #f0f0f0 !important;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-/* Active or hovered nav link */
+
 .nav-link:hover,
 .nav-link.active {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 6px;
   color: #ffffff !important;
+  font-weight: 600;
 }
 
 /* Navbar container spacing */
@@ -122,8 +172,8 @@ const handleLogout = () => {
   filter: brightness(0) invert(1); /* ensure it's white */
 }
 
-/* Fix for top spacing due to fixed-top */
+
 body {
-  padding-top: 70px; /* adjust if navbar height changes */
+  padding-top: 70px; 
 }
 </style>
