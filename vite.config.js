@@ -13,9 +13,20 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '^/api*': {
-        
-      target: 'https://info3180-backend.onrender.com'
+      '/api': {
+        target: 'https://info3180-backend.onrender.com',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '/api'),
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, res) => {
+            console.error('proxy error', err);
+            res.writeHead(500, {
+              'Content-Type': 'text/plain',
+            });
+            res.end('Something went wrong with the proxy request');
+          });
+        }
       }
     }
   }
