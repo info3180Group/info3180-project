@@ -291,15 +291,85 @@ export default {
 </script>
 
 <style scoped>
-.edit-profile {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+.edit-profile.container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.profile-form {
-  background-color: #f8f9fa;
-  padding: 2rem;
+.edit-profile h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #0d6efd;
+  text-align: center;
+}
+
+.profile-form .form-label {
+  font-weight: 600;
+  color: #333;
+}
+
+.profile-form textarea,
+.profile-form input,
+.profile-form select {
+  font-size: 15px;
+  padding: 10px 12px;
   border-radius: 8px;
-  margin-top: 1rem;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+.profile-form textarea:focus,
+.profile-form input:focus,
+.profile-form select:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 4px rgba(13, 110, 253, 0.3);
+}
+
+.profile-form .form-check-label {
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.profile-form .form-check {
+  margin-bottom: 10px;
+}
+
+.alert-danger {
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.btn-primary {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+}
+
+@media (max-width: 768px) {
+  .edit-profile.container {
+    padding: 20px;
+  }
+
+  .profile-form .col-md-6 {
+    width: 100%;
+  }
+
+  .btn-primary {
+    font-size: 15px;
+  }
 }
 </style>

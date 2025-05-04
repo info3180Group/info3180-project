@@ -282,34 +282,92 @@ export default {
 </script>
 
 <style scoped>
-.profiles {
-  padding-top: 2rem;
+.profiles.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.search-form {
-  background-color: #f8f9fa;
-  padding: 1.5rem;
+/* Header */
+.profiles h2 {
+  font-size: 28px;
+  color: #0d6efd;
+  margin-bottom: 0;
+}
+
+/* Search Form */
+.search-form .form-control,
+.search-form .form-select {
   border-radius: 8px;
-  margin-bottom: 2rem;
+  font-size: 14px;
+  padding: 10px;
+  transition: border-color 0.3s ease;
 }
 
-.profiles-grid {
-  margin-top: 2rem;
+.search-form .form-control:focus,
+.search-form .form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 5px rgba(13, 110, 253, 0.25);
+  outline: none;
 }
 
-.card {
-  height: 100%;
-  transition: transform 0.2s;
+.search-form button {
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 8px;
 }
 
-.card:hover {
+/* Profile Grid */
+.profiles-grid .card {
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease-in-out;
+}
+
+.profiles-grid .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .profile-thumb {
-  height: 200px;
+  height: 220px;
   object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Card Body */
+.card-body {
+  padding: 16px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.list-unstyled li {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.btn-primary,
+.btn-outline-danger,
+.btn-danger {
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.btn-outline-danger {
+  border: 1px solid #dc3545;
+  color: #dc3545;
 }
 
 .btn-outline-danger:hover {
@@ -317,7 +375,25 @@ export default {
   color: white;
 }
 
-.btn i {
-  margin-right: 0.5rem;
+.profiles .btn-primary {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profiles.container {
+    padding: 10px;
+  }
+
+  .search-form .row > div {
+    width: 100%;
+  }
+
+  .btn {
+    margin-bottom: 10px;
+    width: 100%;
+  }
 }
 </style>

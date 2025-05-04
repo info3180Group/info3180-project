@@ -200,31 +200,62 @@ export default {
 
 <style scoped>
 .profile-detail {
-  padding-top: 2rem;
-}
-
-.profile-photo {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  object-fit: cover;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .profile-photo-container {
   text-align: center;
 }
 
-.profile-details {
-  margin-top: 2rem;
+.profile-photo {
+  max-width: 100%;
+  height: auto;
+  border: 3px solid #dee2e6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-content h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-content .lead {
+  font-size: 1.1rem;
+  color: #6c757d;
+  margin-bottom: 1.5rem;
 }
 
 .profile-details h4 {
   margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  color: #2c3e50;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 0.4rem;
 }
 
-.profile-details ul li {
-  margin-bottom: 0.5rem;
+.profile-details ul {
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+.profile-details li {
+  padding: 0.3rem 0;
+}
+
+.biography h4 {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.biography p {
+  white-space: pre-wrap;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.btn-outline-danger {
+  font-weight: 500;
 }
 </style>
