@@ -216,48 +216,90 @@ export default {
     };
   }
 };
-</script>
-
 <style scoped>
 .top-profiles {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.top-profiles h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
 }
 
 .card {
-  transition: transform 0.2s;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  transition: transform 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: scale(1.02);
 }
 
 .card-header {
   background-color: #f8f9fa;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #dee2e6;
 }
 
 .rank {
+  font-size: 1rem;
   font-weight: bold;
-  font-size: 1.2rem;
-  color: #2c3e50;
+  color: #343a40;
 }
 
 .favorites-count {
   font-size: 0.9rem;
-}
-
-.favorites-count i {
-  margin-right: 0.3rem;
+  color: #dc3545;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
 .profile-thumb {
-  height: 200px;
+  height: 240px;
   object-fit: cover;
 }
 
-.btn i {
-  margin-right: 0.5rem;
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+}
+
+.profile-details ul {
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.profile-details li {
+  padding: 0.25rem 0;
+}
+
+.btn {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.text-danger {
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
 }
 </style>
-
