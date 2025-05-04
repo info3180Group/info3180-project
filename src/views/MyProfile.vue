@@ -29,7 +29,7 @@
               class="profile-photo img-fluid rounded"
             />
           </div>
-          <RouterLink to="/profile/edit" class="btn btn-primary w-100">
+          <RouterLink :to="`/profile/edit/${profile.id}`"  class="btn btn-primary w-100">
             Edit Profile
           </RouterLink>
         </div>

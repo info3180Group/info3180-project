@@ -94,6 +94,15 @@
                 </RouterLink>
               </li>
               <li class="nav-item">
+                <RouterLink 
+                  class="nav-link" 
+                  to="/my-profiles"
+                  active-class="active"
+                >
+                  My Profiles
+                </RouterLink>
+              </li>
+              <li class="nav-item">
                 <a 
                   class="nav-link" 
                   href="#" 

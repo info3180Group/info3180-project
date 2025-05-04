@@ -34,7 +34,7 @@ class Profile(db.Model):
     height = db.Column(db.Float)
     fav_cuisine = db.Column(db.String)
     fav_colour = db.Column(db.String)
-    fav_school_subject = db.Column(db.String)  # Fixed typo from "fav_school_sibject"
+    fav_school_subject = db.Column(db.String)  
     political = db.Column(db.Boolean)
     religious = db.Column(db.Boolean)
     family_oriented = db.Column(db.Boolean)

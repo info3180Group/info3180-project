@@ -2,9 +2,7 @@
   <div class="profiles container">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2>Search Profiles</h2>
-      <RouterLink to="/profile/edit" class="btn btn-primary">
-        {{ hasProfile ? 'Edit My Profile' : 'Create Profile' }}
-      </RouterLink>
+
     </div>
     
     <!-- Search Form -->

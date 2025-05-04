@@ -121,16 +121,21 @@ def get_profiles():
 def create_profile():
     form = ProfileForm()
     if form.validate_on_submit():
-        # Check if the user already has a profile
-        existing_profile = Profile.query.filter_by(user_id_fk=form.user_id_fk.data).first()
-        if existing_profile:
-            return jsonify({'message': 'User already has a profile'}), 400
-        
         profile = Profile(
             user_id_fk=form.user_id_fk.data,
             description=form.description.data,
             parish=form.parish.data,
-            # etc.
+            biography=form.biography.data,
+            sex=form.sex.data,
+            race=form.race.data,
+            birth_year=form.birth_year.data,
+            height=form.height.data,
+            fav_cuisine=form.fav_cuisine.data,
+            fav_colour=form.fav_colour.data,
+            fav_school_subject=form.fav_school_subject.data,
+            political=form.political.data,
+            religious=form.religious.data,
+            family_oriented=form.family_oriented.data
         )
         db.session.add(profile)
         db.session.commit()

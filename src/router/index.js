@@ -49,6 +49,12 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
+      path: '/profile/edit/:id',
+      name: 'edit-profile',
+      component: () => import('../views/EditProfile.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
       path: '/matches',
       name: 'matches',
       component: () => import('../views/MatchProfiles.vue'),
@@ -64,6 +70,18 @@ const router = createRouter({
       path: '/top-profiles',
       name: 'top-profiles',
       component: () => import('../views/TopProfiles.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/my-profiles',
+      name: 'user-profiles',
+      component: () => import('../views/UserProfiles.vue'),
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/profiles/new',
+      name: 'new-profile',
+      component: () => import('../views/NewProfile.vue'),
       meta: { requiresAuth: true }
     }
   ]
