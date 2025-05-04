@@ -10,53 +10,71 @@
       {{ error }}
     </div>
     
-    <div v-else-if="matches.length === 0" class="text-center">
+    <div v-else-if="Object.keys(profileMatches).length === 0" class="text-center">
       <p>No matches found. Try updating your profile preferences!</p>
     </div>
     
-    <div v-else class="row">
-      <div v-for="match in matches" :key="match.id" class="col-md-4 mb-4">
-        <div class="card h-100">
-          <div class="card-body">
-            <h5 class="card-title">Match Details</h5>
-            <ul class="list-unstyled">
-              <li><strong>Parish:</strong> {{ match.parish }}</li>
-              <li><strong>Age:</strong> {{ new Date().getFullYear() - match.birth_year }}</li>
-              <li><strong>Gender:</strong> {{ match.sex }}</li>
-              <li><strong>Favorite Cuisine:</strong> {{ match.fav_cuisine }}</li>
-              <li><strong>Race:</strong> {{ match.race }}</li>
-            </ul>
-            
-            <p class="card-text">{{ match.description }}</p>
-            
-            <div class="mt-3">
-              <h6>Interests</h6>
-              <div class="interests-badges">
-                <span v-if="match.political" class="badge bg-info me-2">Political</span>
-                <span v-if="match.religious" class="badge bg-info me-2">Religious</span>
-                <span v-if="match.family_oriented" class="badge bg-info me-2">Family Oriented</span>
+    <div v-else>
+     
+      <div v-for="(matches, profileId) in profileMatches" :key="profileId" class="profile-matches mb-5">
+        <h3 class="mb-4">Matches for Profile #{{ profileId }}</h3>
+        
+        <div class="row">
+          <div v-for="match in matches" :key="match.id" class="col-md-4 mb-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                  <img 
+                    :src="match.user?.photo ? `/uploads/${match.user.photo}` : '/default-profile.jpg'" 
+                    class="profile-img me-3"
+                    :alt="match.user?.name"
+                  />
+                  <div>
+                    <h5 class="card-title mb-0">{{ match.user?.name }}</h5>
+                    <small class="text-muted">@{{ match.user?.username }}</small>
+                  </div>
+                </div>
+
+                <ul class="list-unstyled">
+                  <li><strong>Parish:</strong> {{ match.parish }}</li>
+                  <li><strong>Age:</strong> {{ new Date().getFullYear() - match.birth_year }}</li>
+                  <li><strong>Gender:</strong> {{ match.sex }}</li>
+                  <li><strong>Favorite Cuisine:</strong> {{ match.fav_cuisine }}</li>
+                  <li><strong>Race:</strong> {{ match.race }}</li>
+                </ul>
+                
+                <p class="card-text">{{ match.description }}</p>
+                
+                <div class="mt-3">
+                  <h6>Interests</h6>
+                  <div class="interests-badges">
+                    <span v-if="match.political" class="badge bg-info me-2">Political</span>
+                    <span v-if="match.religious" class="badge bg-info me-2">Religious</span>
+                    <span v-if="match.family_oriented" class="badge bg-info me-2">Family Oriented</span>
+                  </div>
+                </div>
+                
+                <div class="mt-3">
+                  <button 
+                    @click="viewProfile(match.id)" 
+                    class="btn btn-primary me-2"
+                  >
+                    View Profile
+                  </button>
+                  <button 
+                    v-if="!isFavorited(match.user_id_fk)"
+                    @click="handleFavorite(match.user_id_fk)" 
+                    class="btn btn-outline-danger"
+                  >
+                    <i class="bi bi-heart"></i>
+                    Add to Favorites
+                  </button>
+                  <span v-else class="text-danger">
+                    <i class="bi bi-heart-fill"></i>
+                    Favorited
+                  </span>
+                </div>
               </div>
-            </div>
-            
-            <div class="mt-3">
-              <button 
-                @click="viewProfile(match.id)" 
-                class="btn btn-primary me-2"
-              >
-                View Profile
-              </button>
-              <button 
-                v-if="!isFavorited(match.user_id_fk)"
-                @click="handleFavorite(match.user_id_fk)" 
-                class="btn btn-outline-danger"
-              >
-                <i class="bi bi-heart"></i>
-                Add to Favorites
-              </button>
-              <span v-else class="text-danger">
-                <i class="bi bi-heart-fill"></i>
-                Favorited
-              </span>
             </div>
           </div>
         </div>
@@ -78,7 +96,8 @@ export default {
     const loading = ref(true);
     const error = ref(null);
     const currentUser = JSON.parse(localStorage.getItem('user') || 'null');
-    const userProfile = ref(null);
+    const userProfiles = ref([]);
+    const profileMatches = ref({});
     const favorites = ref([]);
     const csrf_token = ref('');
 
@@ -130,7 +149,7 @@ export default {
       }
     };
 
-    const getUserProfile = async () => {
+    const getUserProfiles = async () => {
       try {
         const response = await axios.get('/api/profiles', {
           headers: {
@@ -138,32 +157,64 @@ export default {
           }
         });
         
-        userProfile.value = response.data.find(profile => 
+        userProfiles.value = response.data.filter(profile => 
           profile.user_id_fk === currentUser.id
         );
         
-        if (userProfile.value) {
-          await fetchMatches();
+        if (userProfiles.value.length > 0) {
+          await fetchAllMatches();
         } else {
           error.value = 'Please create a profile first';
           loading.value = false;
         }
       } catch (err) {
-        error.value = 'Failed to fetch user profile';
+        error.value = 'Failed to fetch user profiles';
         loading.value = false;
-        console.error('Error getting user profile:', err);
+        console.error('Error getting user profiles:', err);
       }
     };
 
-    const fetchMatches = async () => {
+    const fetchAllMatches = async () => {
       try {
-        const response = await axios.get(`/api/profiles/matches/${userProfile.value.id}`, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
-          }
-        });
+        const matchPromises = userProfiles.value.map(profile => 
+          axios.get(`/api/profiles/matches/${profile.id}`, {
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+          })
+        );
         
-        matches.value = response.data.matches;
+        const responses = await Promise.all(matchPromises);
+        
+       
+        for (let i = 0; i < responses.length; i++) {
+          const profileId = userProfiles.value[i].id;
+          const matches = responses[i].data.matches;
+          
+          
+          const matchesWithUsers = await Promise.all(
+            matches
+              .filter(match => match.user_id_fk !== currentUser.id) 
+              .map(async (match) => {
+                try {
+                  const userResponse = await axios.get(`/api/users/${match.user_id_fk}`, {
+                    headers: {
+                      'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                  });
+                  return {
+                    ...match,
+                    user: userResponse.data.user
+                  };
+                } catch (err) {
+                  console.error(`Error fetching user for match ${match.id}:`, err);
+                  return match;
+                }
+              })
+          );
+          
+          profileMatches.value[profileId] = matchesWithUsers;
+        }
       } catch (err) {
         error.value = err.response?.data?.error || 'Failed to fetch matches';
         console.error('Error fetching matches:', err);
@@ -179,7 +230,7 @@ export default {
     onMounted(async () => {
       await getCsrfToken();
       await fetchFavorites();
-      getUserProfile();
+      await getUserProfiles();
     });
 
     return {
@@ -188,7 +239,8 @@ export default {
       error,
       isFavorited,
       handleFavorite,
-      viewProfile
+      viewProfile,
+      profileMatches
     };
   }
 };
@@ -222,9 +274,8 @@ export default {
 }
 
 .card-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.2;
 }
 
 .card-text {
@@ -259,6 +310,30 @@ export default {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
+}
+
+.profile-matches {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.profile-matches h3 {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e9ecef;
+}
+
+.text-muted {
+  font-size: 0.9rem;
 }
 </style>
 

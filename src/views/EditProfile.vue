@@ -21,7 +21,18 @@
               <option value="Kingston">Kingston</option>
               <option value="St. Andrew">St. Andrew</option>
               <option value="St. Catherine">St. Catherine</option>
-              <!-- Add other parishes -->
+              <option value="Clarendon">Clarendon</option>
+              <option value="Manchester">Manchester</option>
+              <option value="St. Elizabeth">St. Elizabeth</option>
+              <option value="Westmoreland">Westmoreland</option>
+              <option value="Hanover">Hanover</option>
+              <option value="St. James">St. James</option>
+              <option value="Trelawny">Trelawny</option>
+              <option value="St. Ann">St. Ann</option>
+              <option value="St. Mary">St. Mary</option>
+              <option value="Portland">Portland</option>
+              <option value="St. Thomas">St. Thomas</option>
+
             </select>
           </div>
 
@@ -167,7 +178,7 @@ export default {
     
     const profileData = ref({
       description: '',
-      parish: '',  // Add parish field
+      parish: '',  
       biography: '',
       sex: '',
       race: '',
@@ -210,7 +221,7 @@ export default {
           profileData.value = {
             id: userProfile.id,
             description: userProfile.description || '',
-            parish: userProfile.parish || '',  // Add parish field
+            parish: userProfile.parish || '',  
             biography: userProfile.biography || '',
             sex: userProfile.sex || '',
             race: userProfile.race || '',
@@ -235,7 +246,7 @@ export default {
       try {
         const payload = {
           description: profileData.value.description,
-          parish: profileData.value.parish,  // Add parish field
+          parish: profileData.value.parish,  
           biography: profileData.value.biography,
           sex: profileData.value.sex,
           race: profileData.value.race,

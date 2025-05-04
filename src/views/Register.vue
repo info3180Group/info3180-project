@@ -82,12 +82,12 @@ export default {
 
         message.value = response.data.message;
         if (response.status === 201) {
-          // Redirect to login page after successful registration
+         
           router.push('/login');
         }
       } catch (error) {
         if (error.response && error.response.data) {
-          // Handle form validation errors from backend
+          
           if (typeof error.response.data === 'object') {
             message.value = Object.values(error.response.data).join(', ');
           } else {
@@ -182,7 +182,7 @@ button[type="submit"]:hover {
 .register p {
   text-align: center;
   margin-top: 10px;
-  color: #d9534f; /* red for errors; adjust if needed */
+  color: #d9534f; 
 }
 
 .login-link {

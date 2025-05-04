@@ -34,7 +34,7 @@
                 About
               </RouterLink>
             </li>
-            <!-- Show these items only when user is NOT logged in -->
+          
             <template v-if="!authStore.isAuthenticated">
               <li class="nav-item">
                 <RouterLink 
@@ -55,7 +55,7 @@
                 </RouterLink>
               </li>
             </template>
-            <!-- Show these items only when user is logged in -->
+          
             <template v-else>
               <li class="nav-item">
                 <RouterLink 
@@ -63,7 +63,7 @@
                   to="/my-profile"
                   active-class="active"
                 >
-                  My Profile
+                 Recent Profile
                 </RouterLink>
               </li>
               <li class="nav-item">
@@ -99,7 +99,7 @@
                   to="/my-profiles"
                   active-class="active"
                 >
-                  My Profiles
+                  All My Profiles
                 </RouterLink>
               </li>
               <li class="nav-item">

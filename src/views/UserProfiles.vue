@@ -2,9 +2,16 @@
   <div class="user-profiles container">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2>My Profiles</h2>
-      <RouterLink to="/profiles/new" class="btn btn-primary">
+      <RouterLink 
+        v-if="profiles.length < 3"
+        to="/profiles/new" 
+        class="btn btn-primary"
+      >
         Create New Profile
       </RouterLink>
+      <span v-else class="text-muted">
+        Maximum number of profiles (3) reached
+      </span>
     </div>
 
     <div v-if="loading" class="text-center">
@@ -17,9 +24,13 @@
 
     <div v-else-if="profiles.length === 0" class="text-center">
       <p>You haven't created any profiles yet.</p>
-      <RouterLink to="/profiles/new" class="btn btn-primary mt-3">
+      <RouterLink 
+        to="/profiles/new" 
+        class="btn btn-primary mt-3"
+      >
         Create Your First Profile
       </RouterLink>
+      <p class="text-muted mt-2">You can create up to 3 profiles</p>
     </div>
 
     <div v-else class="row">
@@ -59,7 +70,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 
 export default {
@@ -89,6 +100,10 @@ export default {
       }
     };
 
+    const canCreateProfile = computed(() => {
+      return profiles.value.length < 3;
+    });
+
     onMounted(() => {
       fetchUserProfiles();
     });
@@ -96,7 +111,8 @@ export default {
     return {
       profiles,
       loading,
-      error
+      error,
+      canCreateProfile
     };
   }
 };

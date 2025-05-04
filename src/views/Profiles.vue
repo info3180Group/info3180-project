@@ -5,7 +5,7 @@
 
     </div>
     
-    <!-- Search Form -->
+
     <div class="search-form">
       <form @submit.prevent="searchProfiles" class="mb-4">
         <div class="row g-3">
@@ -48,7 +48,7 @@
       </form>
     </div>
 
-    <!-- Results Section -->
+    
     <div class="profiles-grid">
       <div v-if="loading" class="text-center">
         <p>Loading profiles...</p>
@@ -287,7 +287,7 @@ export default {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Header */
+
 .profiles h2 {
   font-size: 28px;
   color: #0d6efd;
@@ -334,7 +334,7 @@ export default {
   border-top-right-radius: 12px;
 }
 
-/* Card Body */
+
 .card-body {
   padding: 16px;
 }
@@ -379,7 +379,7 @@ export default {
   border-radius: 8px;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .profiles.container {
     padding: 10px;

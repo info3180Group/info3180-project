@@ -103,18 +103,18 @@ export default {
           }
         });
         
-        // Fetch profile details for each user
+        
         const profilesWithDetails = await Promise.all(
           response.data.top_favoured_users.map(async (user) => {
             try {
-              // First get the profile ID for this user
+            
               const profilesResponse = await axios.get('/api/profiles', {
                 headers: {
                   'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
               });
               
-              // Find the profile that belongs to this user
+              
               const userProfile = profilesResponse.data.find(
                 profile => profile.user_id_fk === user.id
               );
@@ -133,7 +133,7 @@ export default {
           })
         );
         
-        // Filter out users without profiles
+       
         topProfiles.value = profilesWithDetails.filter(profile => profile.profile);
       } catch (err) {
         if (err.response?.status === 500) {
@@ -182,7 +182,7 @@ export default {
 
         if (response.status === 201 || response.status === 200) {
           await fetchFavorites();
-          await fetchTopProfiles(); // Refresh the list after favoriting
+          await fetchTopProfiles(); 
         }
       } catch (err) {
         error.value = err.response?.data?.error || 'Failed to favorite profile';

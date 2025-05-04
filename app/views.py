@@ -42,7 +42,7 @@ def register():
             photo = form.photo.data
             photo_filename = secure_filename(photo.filename)
             upload_folder = app.config['UPLOAD_FOLDER']
-            os.makedirs(upload_folder, exist_ok=True)  # ensure folder exists
+            os.makedirs(upload_folder, exist_ok=True) 
             photo.save(os.path.join(upload_folder, photo_filename))
         new_user = User(
             username=form.username.data,
@@ -62,7 +62,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user and check_password_hash(user.password, form.password.data):
-            # Implement session or token here
+           
             payload = {
                     'id': user.id,
                     'username': user.username,
@@ -85,7 +85,7 @@ def login():
 
 @app.route('/api/auth/logout', methods=['POST'])
 def logout():
-    # If you are using Flask-Login or sessions
+   
     return jsonify({'message': 'Logout successful'})
 ###
 # The functions below should be applicable to all Flask apps.
@@ -113,7 +113,7 @@ def get_profiles():
         'political': p.political,
         'religious': p.religious,
         'family_oriented': p.family_oriented
-    # etc.
+
     } for p in profiles]
     return jsonify(result)
 
@@ -173,23 +173,23 @@ def get_profile(profile_id):
         'political': profile.political,
         'religious': profile.religious,
         'family_oriented': profile.family_oriented
-        # etc.
+      
     } 
     return jsonify(result)
 
 @app.route('/api/profiles/<int:profile_id>', methods=['PUT'])
 def update_profile(profile_id):
-    # 1. Get the profile from database
+  
     profile = Profile.query.get(profile_id)
     if not profile:
         return jsonify({'error': 'Profile not found'}), 404
 
-    # 2. Get the JSON data sent in request
+   
     data = request.get_json()
     if not data:
         return jsonify({'error': 'No input data provided'}), 400
 
-    # 3. Update fields if they exist in data
+    
     profile.description = data.get('description', profile.description)
     profile.parish = data.get('parish', profile.parish)
     profile.biography = data.get('biography', profile.biography)
@@ -204,10 +204,10 @@ def update_profile(profile_id):
     profile.religious = data.get('religious', profile.religious)
     profile.family_oriented = data.get('family_oriented', profile.family_oriented)
 
-    # 4. Save changes to database
+    
     db.session.commit()
 
-    # 5. Return the updated profile
+    
     return jsonify({
         'message': 'Profile updated successfully',
         'profile': {

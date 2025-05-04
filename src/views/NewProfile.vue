@@ -24,9 +24,21 @@
             required
           >
             <option value="">Choose...</option>
-            <option value="Kingston">Kingston</option>
-            <option value="St. Andrew">St. Andrew</option>
-            <!-- Add other parishes -->
+            <option value="">Select Parish</option>
+              <option value="Kingston">Kingston</option>
+              <option value="St. Andrew">St. Andrew</option>
+              <option value="St. Catherine">St. Catherine</option>
+              <option value="Clarendon">Clarendon</option>
+              <option value="Manchester">Manchester</option>
+              <option value="St. Elizabeth">St. Elizabeth</option>
+              <option value="Westmoreland">Westmoreland</option>
+              <option value="Hanover">Hanover</option>
+              <option value="St. James">St. James</option>
+              <option value="Trelawny">Trelawny</option>
+              <option value="St. Ann">St. Ann</option>
+              <option value="St. Mary">St. Mary</option>
+              <option value="Portland">Portland</option>
+              <option value="St. Thomas">St. Thomas</option>
           </select>
         </div>
 
@@ -59,7 +71,7 @@
           </select>
         </div>
 
-        <!-- Add other form fields following the same pattern -->
+      
         
         <div class="col-12">
           <label for="biography" class="form-label">Biography</label>
@@ -189,7 +201,7 @@ export default {
       biography: '',
       sex: '',
       race: '',
-      birth_year: null, // We'll calculate this from age
+      birth_year: null, 
       height: '',
       fav_cuisine: '',
       fav_colour: '',
@@ -216,7 +228,7 @@ export default {
 
     const handleSubmit = async () => {
       try {
-        // Get CSRF token before submitting
+    
         await getCsrfToken();
         
         const response = await axios.post('/api/profiles', profileData.value, {
@@ -236,7 +248,7 @@ export default {
       }
     };
 
-    // Get CSRF token and initialize birth year when component mounts
+ 
     onMounted(() => {
       updateBirthYear();
       getCsrfToken();

@@ -119,7 +119,7 @@ export default {
         
         profile.value = response.data;
         
-        // Fetch user details to get the photo
+       
         const userResponse = await axios.get(`/api/users/${profile.value.user_id_fk}`, {
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -129,7 +129,7 @@ export default {
         userPhoto.value = userResponse.data.user.photo;
         canFavorite.value = currentUser && currentUser.id !== profile.value.user_id_fk;
         
-        // Check favorite status after profile is loaded
+      
         if (canFavorite.value) {
           await fetchFavorites();
         }
@@ -163,10 +163,10 @@ export default {
           }
         });
 
-        // Check response and update UI
+      
         if (response.status === 201 || response.status === 200) {
           isFavorited.value = true;
-          await fetchFavorites(); // Refresh favorites list
+          await fetchFavorites();
         }
       } catch (err) {
         if (err.response?.status === 400) {
